@@ -1,19 +1,11 @@
-use std::io;
+mod utils;
+
+use utils::name::{get_name_from_user_input, name_or_default};
 
 fn main() {
-    println!("Please input a name");
-
-    // Declarando uma variável mutável, por padrão elas são imutáveis
-    let mut name = String::new();
-
-    // &mut -> Indica que é uma referência de um valor mutável
-    io::stdin()
-        .read_line(&mut name)
-        .expect("Failed to get user input");
-
-    if name.trim().is_empty() {
-        name = String::from("world");
-    }
+    let input_name = get_name_from_user_input()
+        .expect("Failed to get username");
+    let name = name_or_default(input_name);
 
     println!("Hello, {}!", name.trim());
 }
